@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file-format id="CSV Sample File Format"
+             encoding="ISO-8859-1"
+             skipLines="1"
+             lineSeparator="\r\n">
+    <record id="Entity" rank="100">
+        <line delimiter=","
+              escape="\"
+              quote="&quot;">
+            <mapping id="First Name">
+                <process>
+                    <trim/>
+                </process>
+            </mapping>
+            <mapping id="Middle Name">
+                <process>
+                    <trim/>
+                </process>
+            </mapping>
+            <mapping id="Last Name">
+                <process>
+                    <trim/>
+                </process>
+            </mapping>
+        </line>
+    </record>
+</file-format>

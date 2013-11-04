@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.gohlke</groupId>
+    <artifactId>flatfile</artifactId>
+    <packaging>bundle</packaging>
+    <version>1.1.7-SNAPSHOT</version>
+
+    <name>Gohlke Flat File Parser</name>
+    <url>http://www.gohlke.com</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.clapper</groupId>
+            <artifactId>javautil</artifactId>
+            <version>3.1.1</version>
+            <!-- embedded -->
+        </dependency>
+        <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>2.3</version>
+            <!-- embedded -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <!-- embedded -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.commons-io</artifactId>
+            <version>1.3.2_5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.commons-lang</artifactId>
+            <version>2.4_6</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.joda-time</artifactId>
+            <version>1.5.2_5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.commons-codec</artifactId>
+            <version>1.3_5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.url</groupId>
+            <artifactId>pax-url-classpath</artifactId>
+            <version>1.2.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.6</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.6.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+
+        <defaultGoal>deploy</defaultGoal>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+
+            <!-- to generate the MANIFEST-FILE of the bundle -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.4</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <!--<Bundle-Name>${project.groupId}.${project.artifactId}-${project.version}</Bundle-Name>-->
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Private-Package>com.gohlke.*,au.com.bytecode.opencsv.*,org.clapper.*,org.apache.commons.csv.*</Private-Package>
+                        <Import-Package>
+                            *,
+                            org.slf4j,
+                            org.slf4j.spi,
+                            org.apache.commons.io,
+                            org.apache.commons.lang,
+                        </Import-Package>
+                        <Export-Package>
+                            com.gohlke.flatfile,
+                            com.gohlke.flatfile.filters,
+                            com.gohlke.flatfile.parser,
+                            com.gohlke.flatfile.processors,
+                            com.gohlke.flatfile.processors.transforms,
+                            org.apache.camel.component.flatfile
+                        </Export-Package>
+                        <Exclude-Resource>
+                            src/main/resources/features.xml
+                        </Exclude-Resource>
+                        <Embed-Dependency>
+                            opencsv,javautil,commons-csv;inline=true
+                        </Embed-Dependency>
+                        <!--<Embed-Dependency>
+                            *;inline=true
+                        </Embed-Dependency>-->
+                        <Include-Resource>
+                            {maven-resources}
+                        </Include-Resource>
+                        <Bundle-Vendor>
+                            Jennifer Gohlke
+                        </Bundle-Vendor>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+                <configuration>
+                    <forkMode>pertest</forkMode>
+                    <!-- Show the test errors on console -->
+                    <useFile>false</useFile>
+                    <printSummary>false</printSummary>
+                    <systemPropertyVariables>
+                        <org.osgi.framework.storage>${basedir}/../testenv/bundles</org.osgi.framework.storage>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

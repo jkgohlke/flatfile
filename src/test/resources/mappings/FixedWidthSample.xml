@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file-format id="Fixed Width Sample File Format"
+             encoding="ISO-8859-1"
+             lineSeparator="\r\n">
+    <record id="State Entry">
+        <line length="38">
+            <mapping id="State ID">
+                <span start="0" end="4"/>
+                <process>
+                    <trim/>
+                </process>
+            </mapping>
+            <mapping id="State Name">
+                <span length="26"/>
+                <process>
+                    <trim/>
+                </process>
+            </mapping>
+            <mapping id="Admission Date">
+                <span length="8"/>
+                <process>
+                    <trim/>
+                    <transform>
+                        <datetime pattern="YYYYMMdd" timezone="UTC" chronology="ISO8601"/>
+                        <datetime pattern="YYYY-MM-dd HH:mm:ss.SSSSSSS ZZZ" timezone="UTC" chronology="ISO8601"/>
+                    </transform>
+                </process>
+            </mapping>
+        </line>
+    </record>
+</file-format>

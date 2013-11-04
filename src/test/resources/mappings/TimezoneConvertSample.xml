@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file-format id="Timezone Convert CSV Sample File Format"
+             encoding="UTF-8"
+             lineSeparator="\r\n">
+    <record id="DateTime Record">
+        <line delimiter=","
+              escape="\"
+              quote="&quot;">
+            <mapping id="Date Time">
+                <process>
+                    <trim/>
+                    <transform>
+                        <datetime pattern="YYYY-MM-dd HH:mm:ss.SSSSSSSZZ"/>
+                        <datetime pattern="YYYYMMdd HHmmssZ" timezone="UTC"/>
+                    </transform>
+                </process>
+            </mapping>
+        </line>
+    </record>
+</file-format>

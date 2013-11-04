@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file-format id="Example 2"
+             encoding="ISO-8859-1"
+             lineSeparator="\r\n">
+    <record id="Company" rank="100">
+        <filter>
+            <reference>Type</reference>
+            <matches>
+                <constant>C</constant>
+            </matches>
+        </filter>
+        <line minLength="32">
+            <mapping id="Type">
+                <span length="1"/>
+            </mapping>
+            <mapping id="Company Name">
+                <span length="24"/>
+            </mapping>
+            <mapping id="Wysk Number">
+                <span length="7"/>
+                <process>
+                    <uppercase/>
+                </process>
+            </mapping>
+            <process scope="global" order="after">
+                <trim/>
+            </process>
+        </line>
+    </record>
+    <record id="Person" rank="90">
+        <filter>
+            <reference>Type</reference>
+            <matches>
+                <constant>P</constant>
+            </matches>
+        </filter>
+        <line minLength="40">
+            <mapping id="Type">
+                <span length="1"/>
+            </mapping>
+            <mapping id="Person Name">
+                <span length="24"/>
+            </mapping>
+            <mapping id="Wysk Number">
+                <span length="7"/>
+                <process>
+                    <uppercase/>
+                </process>
+            </mapping>
+            <mapping id="DOB">
+                <span length="8"/>
+                <process>
+                    <trim/>
+                    <transform>
+                        <datetime pattern="YYYYMMdd"/>
+                        <datetime pattern="MMM dd, YYYY"/>
+                    </transform>
+                </process>
+            </mapping>
+            <process scope="global" order="after">
+                <trim/>
+            </process>
+        </line>
+    </record>
+</file-format>

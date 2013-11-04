@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file-format id="Example 1"
+             encoding="ISO-8859-1"
+             lineSeparator="\r\n"
+             skipLines="1">
+    <record id="Company" rank="100">
+        <filter>
+            <reference>Type</reference>
+            <matches>
+                <constant>C</constant>
+            </matches>
+        </filter>
+        <line delimiter=","
+              escape="\"
+              quote="&quot;">
+            <mapping id="Type"/>
+            <mapping id="Company Name"/>
+            <mapping id="Wysk Number">
+                <process>
+                    <uppercase/>
+                </process>
+            </mapping>
+        </line>
+    </record>
+    <record id="Person" rank="90">
+        <filter>
+            <reference>Type</reference>
+            <matches>
+                <constant>P</constant>
+            </matches>
+        </filter>
+        <line delimiter=","
+              escape="\"
+              quote="&quot;">
+            <mapping id="Type"/>
+            <mapping id="Person Name"/>
+            <mapping id="Wysk Number">
+                <process>
+                    <uppercase/>
+                </process>
+            </mapping>
+        </line>
+    </record>
+</file-format>

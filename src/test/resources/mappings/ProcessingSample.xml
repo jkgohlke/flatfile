@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file-format id="Processing Sample File Format"
+             encoding="UTF-8"
+             skipLines="1"
+             lineSeparator="\r\n">
+    <record id="Person" spname="sp_Person">
+        <line delimiter=","
+              quote="&quot;">
+            <process>
+                <trim/>
+                <replace pattern="\n" replacement=", " scope="all"/>
+                <compress/>
+                <replace pattern="NULL" replacement="" scope="all"/>
+                <uppercase/>
+            </process>
+            <mapping id="Alias" spvar="@alias"/>
+            <mapping id="Other Aliases" spvar="@otherAliases"/>
+            <mapping id="SSN" spvar="@ssn">
+                <process>
+                    <replace pattern="[^0-9]" replacement="" scope="all"/>
+                    <transform>
+                        <extract pattern="([0-9][0-9][0-9])([0-9][0-9])([0-9][0-9][0-9][0-9])"
+                                 output="\1-\2-\3"/>
+                    </transform>
+                </process>
+            </mapping>
+            <mapping id="Legal Name" spvar="@legalName"/>
+            <mapping id="Other Name" spvar="@otherName"/>
+            <mapping id="Address" spvar="@address">
+                <process>
+                    <address type="full"/>
+                    <uppercase/>
+                </process>
+            </mapping>
+            <mapping id="City" spvar="@city"/>
+            <mapping id="State" spvar="@state"/>
+            <mapping id="Postal Code" spvar="@postalCode">
+                <process>
+                    <replace pattern="[^0-9]" replacement="" scope="all"/>
+                </process>
+            </mapping>
+            <mapping id="DOB" spvar="@dob">
+                <process>
+                    <transform>
+                        <datetime pattern="YYYY-MM-dd HH:mm:ss.SSS"/>
+                        <datetime pattern="YYYY-MM-dd HH:mm:ss.SSS"/>
+                    </transform>
+                </process>
+            </mapping>
+            <mapping id="Drivers License Number" spvar="@dlNum">
+                <process>
+                    <replace pattern="[^0-9]" replacement="" scope="all"/>
+                </process>
+            </mapping>
+            <mapping id="Drivers License State" spvar="@dlState"/>
+            <mapping id="Have Copy of Drivers License">
+                <process>
+                    <transform>
+                        <boolean format="any"/>
+                        <boolean format="truefalse"/>
+                    </transform>
+                </process>
+            </mapping>
+            <mapping id="Date of Hire" spvar="@dateOfHire">
+                <process>
+                    <replace pattern=" " replacement="" scope="all"/>
+                    <replace pattern="\\" replacement="-" scope="all"/>
+                    <replace pattern="/" replacement="-" scope="all"/>
+                    <transform>
+                        <extract pattern="([0-9]+)-([0-9]+)-([0-9]+)" output="\1-\2-\3"/>
+                        <split separator="-"/>
+                        <pad type="left" length="2" with="0"/>
+                        <join separator="-"/>
+                    </transform>
+                    <transform>
+                        <datetime pattern="MM-dd-YY"/>
+                        <datetime pattern="YYYY-MM-dd HH:mm:ss.SSS"/>
+                    </transform>
+                </process>
+            </mapping>
+            <mapping id="Updated Time"/>
+            <mapping id="Have W-9">
+                <process>
+                    <transform>
+                        <boolean format="any"/>
+                        <boolean format="truefalse"/>
+                    </transform>
+                </process>
+            </mapping>
+            <mapping id="Other Documents"/>
+            <mapping id="Phone Number" spvar="@phoneNum">
+                <process>
+                    <replace pattern="[^0-9]" replacement="" scope="all"/>
+                    <transform>
+                        <extract pattern="([0-9][0-9][0-9])([0-9][0-9][0-9])([0-9][0-9][0-9][0-9])"
+                                 output="+1 (\1)-\2-\3"/>
+                    </transform>
+                </process>
+            </mapping>
+            <mapping id="Alternate Phone Number" spvar="@altPhoneNum">
+                <process>
+                    <replace pattern="[^0-9]" replacement="" scope="all"/>
+                    <transform>
+                        <extract pattern="([0-9][0-9][0-9])([0-9][0-9][0-9])([0-9][0-9][0-9][0-9])"
+                                 output="+1 (\1)-\2-\3"/>
+                    </transform>
+                </process>
+            </mapping>
+            <mapping id="Hiring Manager" spvar="@hiringManager"/>
+        </line>
+    </record>
+</file-format>

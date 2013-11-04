@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file-format id="Pipe Delimited Transactional Sample File Format"
+             encoding="ISO-8859-1"
+             lineSeparator="\r\n">
+    <record id="Furniture">
+        <filter>
+            <allof>
+                <if>
+                    <reference>Item Type</reference>
+                    <matches>
+                        <constant>Furniture</constant>
+                    </matches>
+                </if>
+                <if>
+                    <reference>Item Type</reference>
+                    <not>
+                        <matches>
+                            <constant>Fixture</constant>
+                        </matches>
+                    </not>
+                </if>
+                <if>
+                    <reference>Item Type</reference>
+                    <not>
+                        <matches>
+                            <constant>Improvement</constant>
+                        </matches>
+                    </not>
+                </if>
+            </allof>
+        </filter>
+        <line delimiter="|">
+            <mapping id="Item Type"/>
+            <mapping id="Description"/>
+            <mapping id="Length"/>
+            <mapping id="Width"/>
+            <mapping id="Height"/>
+            <process>
+                <trim/>
+            </process>
+        </line>
+    </record>
+    <record id="Fixture">
+        <filter>
+            <reference>Item Type</reference>
+            <matches>
+                <constant>Fixture</constant>
+            </matches>
+        </filter>
+        <line delimiter="|">
+            <mapping id="Item Type"/>
+            <mapping id="Description"/>
+            <mapping id="Location"/>
+            <process>
+                <trim/>
+            </process>
+        </line>
+    </record>
+</file-format>

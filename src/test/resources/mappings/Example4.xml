@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file-format id="Example 4">
+    <record id="Time Period">
+        <line delimiter="|">
+            <mapping id="Start Date">
+                <process>
+                    <trim/>
+                    <transform>
+                        <datetime pattern="YYYY-MM-dd HH:mm:ssZZ"/>
+                        <datetime pattern="MMM dd, YYYY h:mm:ss a, ZZZ"
+                                  timezone="CST6CDT"/>
+                    </transform>
+                </process>
+            </mapping>
+            <mapping id="End Date">
+                <process>
+                    <trim/>
+                    <transform>
+                        <datetime pattern="YYYY-MM-dd HH:mm:ssZZ"/>
+                        <datetime pattern="MMM dd, YYYY h:mm:ss a, ZZZ"
+                                  timezone="CST6CDT"/>
+                    </transform>
+                </process>
+            </mapping>
+        </line>
+    </record>
+</file-format>
