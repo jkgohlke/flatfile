@@ -10,7 +10,7 @@ This project uses Maven to manage builds and dependency management. The complete
 Features
 -------------
 
-Flatfile contains an XML grammar for processing flat files that is nearly completely documented. It also provides a broad range of available inline data transformation and processing tools.
+Flatfile contains an XML grammar for processing flat files that is [completely documented](doc/Mapping%20File%20Format.pdf). It also provides a broad range of available inline data transformation and processing tools.
 
 * Text Append/Prepend/Insert/Substring
 * Text Trimming/Stripping
