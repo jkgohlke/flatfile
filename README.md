@@ -23,3 +23,5 @@ Flatfile contains an XML grammar for processing flat files that is [completely d
 * Delimited List Processing/Expansion/Joins
 * Boolean/Numeric/Date/Time Transforms
 * Timezone Aware
+* Extensible through arbitrary XML attributes which are passed upstream
+* Stored Procedure Support (Currently only MSSQL supported)
