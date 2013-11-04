@@ -1,7 +1,7 @@
 Flatfile
 ========
 
-A complete flat-file parsing solution flexible enough to handle structured or unstructured data.
+A complete flat-file parsing solution flexible enough to handle structured or unstructured data written in pure Java.
 
 Flatfile was created in less than a month under a strict deadline. At the time, existing flatfile parsing libraries did not offer scripting outside of the development environment.
 
